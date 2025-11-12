@@ -361,6 +361,56 @@ def render_landing_page():
         </div>
         """, unsafe_allow_html=True)
         
+        # Template download section
+        col_help1, col_download, col_help2 = st.columns([1, 2, 1])
+        with col_download:
+            # Load the template file
+            template_path = Path(__file__).parent.parent / "template.sample.json"
+            if template_path.exists():
+                with open(template_path, 'r') as f:
+                    template_content = f.read()
+                
+                st.download_button(
+                    label="Download JSON Template",
+                    data=template_content,
+                    file_name="resume_template.json",
+                    mime="application/json",
+                    use_container_width=True,
+                    help="Download a sample JSON template to fill out with your information"
+                )
+            
+            # Help expander
+            with st.expander("ℹ️ How to use JSON template", expanded=False):
+                st.markdown("""
+                **Quick Guide:**
+                
+                1. **Download** the template above
+                2. **Edit** the JSON file with your information:
+                   - Replace placeholder text with your actual data
+                   - Keep the field names unchanged
+                   - Use quotes for text values
+                3. **Upload** your completed JSON file below
+                
+                **Key Fields:**
+                - `contact`: Your personal information
+                - `target_role`: Desired job title
+                - `experience`: Work history with bullet points
+                - `education`: Degrees and certifications
+                - `certifications`: Professional credentials
+                
+                **Date Format:** Use `YYYY-MM-DD` (e.g., `2020-01-15`)
+                
+                **Phone Format:** `(555) 123-4567` or `5551234567`
+                
+                **Tips:**
+                - Include quantifiable achievements (numbers, percentages)
+                - Use action verbs in bullet points
+                - Set `current: true` for your current position
+                - Set `end_date: null` if still employed
+                """)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
         # File uploader
         uploaded_file = st.file_uploader(
             "Upload JSON Profile",
@@ -412,3 +462,4 @@ def render_landing_page():
                 No signup required • 100% free • Your data stays on your device
             </p>
         """, unsafe_allow_html=True)
+

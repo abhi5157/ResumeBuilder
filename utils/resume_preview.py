@@ -277,11 +277,11 @@ def render_enhanced_resume_preview(profile_data: Dict, work_history: List, educa
     if ai_summary:
         st.markdown(f"""
         <div style="margin: 1.5rem 0;">
-            <h2 style="color: #000000; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; 
+            <h2 style="color: #000000; font-size: 11pt; font-weight: 700; text-transform: uppercase; 
                        letter-spacing: 1px; border-bottom: 2px solid #000000; padding-bottom: 0.25rem; margin: 0 0 0.75rem 0;">
                 SUMMARY
             </h2>
-            <p style="color: #000000 !important; margin: 0; line-height: 1.7; text-align: justify; font-size: 0.85rem;">
+            <p style="color: #000000 !important; margin: 0; line-height: 1.0; text-align: justify; font-size: 10pt; font-family: 'Calibri Light', 'Calibri', 'Arial', sans-serif;">
                 {ai_summary}
             </p>
         </div>

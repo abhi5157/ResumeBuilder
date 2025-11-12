@@ -1,0 +1,100 @@
+{
+  "contact": {
+    "full_name": "Your Full Name",
+    "email": "your.email@example.com",
+    "phone": "(555) 123-4567",
+    "city": "Your City",
+    "state": "ST",
+    "linkedin": "https://linkedin.com/in/yourprofile",
+    "security_clearance": "None",
+    "branch": "Army"
+  },
+  "target_role": "Your Target Job Title",
+  "summary": "Brief professional summary highlighting your experience, key achievements, and career goals. Keep it to 2-3 sentences and include quantifiable results when possible.",
+  "mos_codes": [
+    {
+      "code": "11B",
+      "branch": "Army",
+      "title": "Infantry",
+      "civilian_skills": [
+        "Team Leadership",
+        "Strategic Planning",
+        "Risk Management",
+        "Emergency Response"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Your Job Title",
+      "organization": "Organization Name",
+      "location": "City, State",
+      "start_date": "2020-01-15",
+      "end_date": null,
+      "current": true,
+      "bullets": [
+        "Led team of X personnel resulting in Y% improvement in operational efficiency",
+        "Managed $X budget with zero overruns across Y fiscal years",
+        "Implemented new process reducing processing time by X%",
+        "Coordinated cross-functional projects with X stakeholders achieving Y% success rate"
+      ],
+      "mos_codes": ["11B"]
+    },
+    {
+      "title": "Previous Job Title",
+      "organization": "Previous Organization",
+      "location": "City, State",
+      "start_date": "2017-06-01",
+      "end_date": "2019-12-31",
+      "current": false,
+      "bullets": [
+        "Achievement bullet with quantifiable metrics",
+        "Another accomplishment showing impact and results"
+      ],
+      "mos_codes": ["11B"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University Name",
+      "degree": "Bachelor of Science, Major",
+      "field_of_study": "Your Major",
+      "graduation_year": 2020,
+      "gpa": 3.5,
+      "honors": ["Honor 1", "Honor 2"],
+      "location": "City, State",
+      "overview": "Optional: Brief description of program focus or specialization"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Certification Name",
+      "issuer": "Issuing Organization",
+      "year": 2023
+    },
+    {
+      "name": "Another Certification",
+      "issuer": "Another Organization",
+      "year": 2022
+    }
+  ],
+  "additional_info": {
+    "awards": [
+      "Award Name 1",
+      "Award Name 2"
+    ],
+    "volunteer": [
+      {
+        "organization": "Organization Name",
+        "role": "Volunteer Role",
+        "description": "Description of your volunteer work and impact",
+        "date_range": "2021 - Present"
+      }
+    ],
+    "languages": ["English (Native)", "Spanish (Conversational)"]
+  },
+  "preferences": {
+    "template": "classic"
+  }
+}
+
