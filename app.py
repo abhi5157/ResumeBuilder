@@ -21,55 +21,143 @@ from models import (
     ResumeProfile,
 )
 
+import sys
+import traceback as _traceback
+
+# Initialize defaults so the rest of the app can still run if some imports fail
+mapping_service = None
+ai_service = None
+resume_service = None
+settings = None
+validator = None
+render_landing_page = None
+render_live_preview_panel = None
+render_enhanced_resume_preview = None
+
+# Helper to record import failures to logs (Streamlit Cloud captures stderr)
+_first_exc = None
+
 try:
     from services.mapping_service import MappingService
+except Exception as _e:
+    _first_exc = _first_exc or _e
+    print("Failed to import services.mapping_service:", file=sys.stderr)
+    _traceback.print_exc()
+    MappingService = None
+
+try:
     from services.ai_service import SimpleAIService
+except Exception as _e:
+    _first_exc = _first_exc or _e
+    print("Failed to import services.ai_service:", file=sys.stderr)
+    _traceback.print_exc()
+    SimpleAIService = None
+
+try:
     from services.resume_service import ResumeService
+except Exception as _e:
+    _first_exc = _first_exc or _e
+    print("Failed to import services.resume_service:", file=sys.stderr)
+    _traceback.print_exc()
+    ResumeService = None
+
+try:
     from utils.config import settings
-    from utils.resume_preview import render_enhanced_resume_preview
-    from components.landing_page import render_landing_page
-    # Use the cleaned live preview component (avoids duplicated HTML tags)
-    from components.live_preview_clean import render_live_preview_panel
-    from utils.validation import FieldValidator, ValidationState
-
-    mapping_service = MappingService()
-    ai_service = SimpleAIService()
-    resume_service = ResumeService()
-    validator = FieldValidator()
-
-    # Silently configure AI provider - no console output
-
-except ImportError as e:
-    mapping_service = None
-    ai_service = None
-    resume_service = None
+except Exception as _e:
+    _first_exc = _first_exc or _e
+    print("Failed to import utils.config.settings:", file=sys.stderr)
+    _traceback.print_exc()
     settings = None
-    validator = None
-    # Provide safe fallbacks so the app doesn't crash with NameError when a component
-    # import fails on deployment (e.g., packaging/path differences on Streamlit Cloud).
-    # These fallbacks show a helpful error message in the UI and avoid AttributeErrors
-    # from missing validator methods.
 
+try:
+    from utils.resume_preview import render_enhanced_resume_preview
+except Exception as _e:
+    _first_exc = _first_exc or _e
+    print("Failed to import utils.resume_preview:", file=sys.stderr)
+    _traceback.print_exc()
+    render_enhanced_resume_preview = None
+
+try:
+    from components.landing_page import render_landing_page
+except Exception as _e:
+    _first_exc = _first_exc or _e
+    print("Failed to import components.landing_page:", file=sys.stderr)
+    _traceback.print_exc()
+    render_landing_page = None
+
+# Use the cleaned live preview component (avoids duplicated HTML tags)
+try:
+    from components.live_preview_clean import render_live_preview_panel
+except Exception as _e:
+    _first_exc = _first_exc or _e
+    print("Failed to import components.live_preview_clean:", file=sys.stderr)
+    _traceback.print_exc()
+    render_live_preview_panel = None
+
+try:
+    from utils.validation import FieldValidator, ValidationState
+except Exception as _e:
+    _first_exc = _first_exc or _e
+    print("Failed to import utils.validation:", file=sys.stderr)
+    _traceback.print_exc()
+    FieldValidator = None
+
+# Instantiate services only when classes are available
+try:
+    if MappingService:
+        mapping_service = MappingService()
+except Exception:
+    print("Error instantiating MappingService", file=sys.stderr)
+    _traceback.print_exc()
+    mapping_service = None
+
+try:
+    if SimpleAIService:
+        ai_service = SimpleAIService()
+except Exception:
+    print("Error instantiating SimpleAIService", file=sys.stderr)
+    _traceback.print_exc()
+    ai_service = None
+
+try:
+    if ResumeService:
+        resume_service = ResumeService()
+except Exception:
+    print("Error instantiating ResumeService", file=sys.stderr)
+    _traceback.print_exc()
+    resume_service = None
+
+try:
+    if FieldValidator:
+        validator = FieldValidator()
+except Exception:
+    print("Error instantiating FieldValidator", file=sys.stderr)
+    _traceback.print_exc()
+    validator = None
+
+# If any import failed, provide helpful fallback UI components and validator stub
+if _first_exc:
     def _missing_component(name, exc):
         def _f(*args, **kwargs):
             st.error(
                 f"Component '{name}' failed to load. The app is partially degraded; check logs for details."
             )
             with st.expander("Debug info"):
-                # Only show the exception string to aid debugging (no sensitive data expected in ImportError)
                 st.write(str(exc))
             return None
 
         return _f
 
-    # Fallback UI components
-    render_landing_page = _missing_component("components.landing_page.render_landing_page", e)
-    render_live_preview_panel = _missing_component(
-        "components.live_preview_clean.render_live_preview_panel", e
+    # Attach fallback components using the first exception for context
+    render_landing_page = render_landing_page or _missing_component(
+        "components.landing_page.render_landing_page", _first_exc
     )
-    render_enhanced_resume_preview = _missing_component(
+    render_live_preview_panel = render_live_preview_panel or _missing_component(
+        "components.live_preview_clean.render_live_preview_panel", _first_exc
+    )
+    render_enhanced_resume_preview = render_enhanced_resume_preview or _missing_component(
         "utils.resume_preview.render_enhanced_resume_preview",
-        e,
+        _first_exc,
     )
 
     # Minimal validator stub to avoid AttributeErrors in validation calls.
@@ -88,7 +176,7 @@ except ImportError as e:
         def validate_date(self, value, label=None):
             return (True, "")
 
-    validator = _ValidatorStub()
+    validator = validator or _ValidatorStub()
 hide_streamlit_style = """
     <style>
     #MainMenu {visibility: hidden;}     /* Hides the hamburger menu */
