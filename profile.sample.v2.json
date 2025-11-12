@@ -1,0 +1,132 @@
+{
+  "schema_version": "v0.2",
+  "profile_id": "candidate-charlie",
+  "csv_lookup_key": "Air Force|3D0X2",
+  "contact": {
+    "full_name": "Candidate Charlie",
+    "email": "candidate.charlie@example.com",
+    "phone": "(555) 0101-0003",
+    "city_state": "San Antonio, TX",
+    "linkedin": "https://www.linkedin.com/in/candidate-charlie"
+  },
+  "service": {
+    "branch": "Air Force",
+    "mos_code": "3D0X2",
+    "mos_title": "Cyber Systems Operations",
+    "paygrade_at_separation": "E-6 (TSgt)",
+    "years_of_service": 8,
+    "service_dates": { "start": "2017-07", "end": "2025-07" },
+    "clearance": "TS/SCI (Active)",
+    "deployments": ["2021-04 to 2021-10 — EUCOM AOR"],
+    "awards": ["Air Force Commendation Medal"]
+  },
+  "target": {
+    "titles": ["Systems Administrator", "Cloud Operations Engineer", "Junior DevOps Engineer"],
+    "industries": ["Cloud/SaaS", "Defense", "Financial Services"],
+    "locations": ["San Antonio, TX", "Austin, TX", "Remote"]
+  },
+  "skills_core": [
+    "Linux/Windows Administration", "Identity & Access Management",
+    "Cloud Foundations", "Configuration Management", "Monitoring/Logging",
+    "Continuity/Disaster Recovery"
+  ],
+  "tools_tech": [
+    "RHEL", "Windows Server", "Active Directory", "Azure AD",
+    "AWS (EC2/S3/IAM basics)", "Terraform (basic)", "Ansible (basic)",
+    "Splunk", "Git"
+  ],
+  "experience": [
+    {
+      "role_military": "Cyber Systems Ops Lead",
+      "unit": "XX Communications Squadron",
+      "dates": { "start": "2022-02", "end": "2025-07" },
+      "achievements_star": [
+        {
+          "s": "Legacy on-prem servers causing outages and manual patch cycles.",
+          "t": "Improve availability and reduce maintenance effort.",
+          "a": "Led 3-person team to migrate 22 services to virtualized platform; scripted patch windows and baseline configs.",
+          "r": "Unplanned outages reduced 45%; patching time cut 50%; audit findings closed (0 open).",
+          "bullet": "Reduced outages 45% by virtualizing 22 services and automating patch baselines; closed all audit findings."
+        },
+        {
+          "s": "Manual identity management process causing compliance delays.",
+          "t": "Automate IAM provisioning and deprovisioning.",
+          "a": "Developed PowerShell scripts to sync Active Directory with cloud IAM; implemented automated workflows.",
+          "r": "Account provisioning time reduced from 3 days to 2 hours; compliance audit score improved 30%.",
+          "bullet": "Automated IAM provisioning reducing turnaround from 3 days to 2 hours; improved compliance audit scores 30%."
+        }
+      ]
+    },
+    {
+      "role_military": "Systems Administrator",
+      "unit": "YY Communications Squadron",
+      "dates": { "start": "2019-01", "end": "2022-01" },
+      "achievements_star": [
+        {
+          "s": "Inconsistent access reviews and stale accounts.",
+          "t": "Strengthen IAM hygiene.",
+          "a": "Implemented quarterly access recertifications and scripted stale-account sweeps.",
+          "r": "Dormant accounts reduced 70%; access review cycle time down 40%.",
+          "bullet": "Cut dormant accounts 70% and access review cycle time 40% by automating quarterly IAM recertifications."
+        },
+        {
+          "s": "No centralized logging solution causing delayed incident response.",
+          "t": "Implement enterprise logging and monitoring.",
+          "a": "Deployed Splunk infrastructure across 50+ servers; created custom dashboards and alerts.",
+          "r": "Mean time to detect security incidents reduced from 48 hours to 15 minutes; prevented 12 potential breaches.",
+          "bullet": "Reduced incident detection time from 48 hours to 15 minutes by deploying Splunk monitoring across 50+ servers."
+        }
+      ]
+    },
+    {
+      "role_military": "Junior Systems Administrator",
+      "unit": "YY Communications Squadron",
+      "dates": { "start": "2017-07", "end": "2018-12" },
+      "achievements_star": [
+        {
+          "s": "Server patching causing frequent unplanned downtime.",
+          "t": "Reduce patch-related outages.",
+          "a": "Created staging environment and automated testing procedures for patch validation.",
+          "r": "Patch-related outages reduced 85%; mean time to recovery improved from 4 hours to 45 minutes.",
+          "bullet": "Reduced patch-related outages 85% through automated testing in staging environment."
+        }
+      ]
+    }
+  ],
+  "education": [
+    { 
+      "degree": "B.S., Information Technology", 
+      "school": "University of Maryland Global Campus", 
+      "grad_year": 2023,
+      "gpa": 3.6,
+      "honors": ["Dean's List"]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "CompTIA Security+",
+      "issuer": "CompTIA",
+      "issue_date": "2020-03-15",
+      "expiration_date": "2023-03-15"
+    },
+    {
+      "name": "Cisco CCNA",
+      "issuer": "Cisco",
+      "issue_date": "2021-06-10",
+      "expiration_date": null
+    },
+    {
+      "name": "AWS Cloud Practitioner",
+      "issuer": "Amazon Web Services",
+      "issue_date": "2024-01-20",
+      "expiration_date": null
+    }
+  ],
+  "keywords": ["Linux", "Active Directory", "IAM", "Virtualization", "Terraform", "Ansible", "Splunk", "Cloud", "DevOps", "Security"],
+  "resume_preferences": { 
+    "template": "modern", 
+    "tone": "impactful", 
+    "include_clearance": true,
+    "bullet_density": 4
+  }
+}

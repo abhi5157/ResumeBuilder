@@ -1,0 +1,210 @@
+{
+  "contact": {
+    "full_name": "Sarah Mitchell",
+    "email": "sarah.mitchell@email.com",
+    "phone": "(555) 246-8135",
+    "linkedin": "https://linkedin.com/in/sarahmitchell",
+    "city": "Seattle",
+    "state": "WA",
+    "security_clearance": "Secret"
+  },
+  "target_role": "Project Manager",
+  "summary": "Results-driven Army veteran with 7+ years of HR and personnel management experience. Proven expertise in coordinating operations, managing personnel records for 200+ individuals, and achieving 98% efficiency ratings. Active Secret clearance. Seeking Project Manager opportunities to leverage military leadership and organizational skills in civilian sector.",
+  "mos_codes": [
+    {
+      "code": "42A",
+      "branch": "Army",
+      "branch_code": "A",
+      "personnel_category": "E",
+      "title": "Human Resources Specialist",
+      "title_military": "Human Resources Specialist",
+      "soc_code": "43-4161",
+      "soc_title": "Human Resources Assistants, Except Payroll and Timekeeping",
+      "onet_code": "43-4161.00",
+      "onet_occupation": "Human Resources Assistants, Except Payroll and Timekeeping",
+      "csv_lookup_key": "A|42A",
+      "civilian_skills": [
+        "Personnel management",
+        "Benefits administration",
+        "Record management",
+        "Customer service",
+        "Data entry"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Human Resources Specialist",
+      "organization": "United States Army",
+      "location": "Joint Base Lewis-McChord, WA",
+      "start_date": "2019-04-01",
+      "end_date": "2024-03-31",
+      "current": false,
+      "bullets": [
+        "Managed personnel records for 200+ soldiers, ensuring 100% accuracy and compliance with Army regulations",
+        "Coordinated benefits administration for battalion of 500+ personnel, processing 150+ actions monthly with zero errors",
+        "Supervised team of 8 HR specialists in daily operations, maintaining 98% efficiency rating across all metrics",
+        "Implemented digital filing system that reduced processing time by 40% and improved record retrieval efficiency"
+      ],
+      "mos_codes": ["42A"]
+    },
+    {
+      "title": "Team Leader",
+      "organization": "United States Army",
+      "location": "Fort Benning, GA",
+      "start_date": "2017-06-01",
+      "end_date": "2019-03-31",
+      "current": false,
+      "bullets": [
+        "Led team of 8 personnel in daily HR operations, maintaining 98% efficiency rating across all performance metrics",
+        "Managed personnel records for 200+ soldiers, ensuring 100% accuracy and regulatory compliance",
+        "Coordinated training programs for 50+ new recruits, achieving 95% completion rate within timeline",
+        "Streamlined onboarding process that reduced new hire processing time from 5 days to 3 days"
+      ],
+      "mos_codes": ["42A"]
+    },
+        {
+      "title": "Project Coordinator",
+      "organization": "Department of Veterans Affairs",
+      "location": "Seattle, WA",
+      "start_date": "2024-04-01",
+      "end_date": null,
+      "current": true,
+      "bullets": [
+        "Coordinated cross-functional teams of 20+ staff to deliver veteran support programs, improving response time by 30%",
+        "Developed project tracking dashboards using Excel and Power BI to monitor key performance metrics"
+      ],
+      "mos_codes": ["11B"]
+    }
+
+  ],
+  "education": [
+    {
+      "institution": "United States Naval Academy",
+      "degree": "Bachelor of Science, Cyber Operations",
+      "field_of_study": "Cyber Operations",
+      "overview": null,
+      "graduation_date": "2018-05-25",
+      "graduation_year": 2018,
+      "gpa": null,
+      "honors": [],
+      "location": "Annapolis, MD",
+      "date_range": "2014 - 2018"
+    },
+    {
+      "institution": "United States Navy",
+      "degree": "Basic Division Officer Course (BDOC)",
+      "field_of_study": "Naval Leadership",
+      "overview": "Nine week course focused on Division Officer leadership through practical instruction in navigation, seamanship, and ship handling both in the classroom and in simulators.",
+      "graduation_date": "2018-08-15",
+      "graduation_year": 2018,
+      "gpa": null,
+      "honors": [],
+      "location": "San Diego, CA",
+      "date_range": null
+    },
+    {
+      "institution": "United States Navy",
+      "degree": "Naval Diesel Plant Engineering Officer Course",
+      "field_of_study": "Marine Engineering",
+      "overview": "Studied advanced topics regarding a Naval warship's diesel and electrical plant, support services to include fuel and lubrication systems, hydraulics, air compressors, power distribution systems, and heat exchange cooling systems. Graduated #4 out of 30 Naval Surface Warfare Officers",
+      "graduation_date": "2019-03-10",
+      "graduation_year": 2019,
+      "gpa": null,
+      "honors": [],
+      "location": "Newport RI",
+      "date_range": null
+    }
+  ],
+  "skills": [
+    {
+      "name": "Personnel Management",
+      "category": "Leadership",
+      "proficiency": "Advanced"
+    },
+    {
+      "name": "Microsoft Office Suite",
+      "category": "Technical",
+      "proficiency": "Expert"
+    },
+    {
+      "name": "Project Coordination",
+      "category": "Technical",
+      "proficiency": "Advanced"
+    },
+    {
+      "name": "Data Analysis",
+      "category": "Technical",
+      "proficiency": "Intermediate"
+    },
+    {
+      "name": "Team Leadership",
+      "category": "Leadership",
+      "proficiency": "Advanced"
+    },
+    {
+      "name": "Process Improvement",
+      "category": "Technical",
+      "proficiency": "Intermediate"
+    },
+    {
+      "name": "Benefits Administration",
+      "category": "Technical",
+      "proficiency": "Advanced"
+    },
+    {
+      "name": "Record Management",
+      "category": "Technical",
+      "proficiency": "Expert"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "CompTIA",
+      "issuer": "Sec+ SY0-601",
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    },
+    {
+      "name": "PMI",
+      "issuer": "Project Management Professional (PMP)",
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    },
+    {
+      "name": "Company",
+      "issuer": "Certification Name",
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    },
+    {
+      "name": "Company",
+      "issuer": "Certification Name",
+      "issue_date": null,
+      "expiration_date": null,
+      "credential_id": null
+    }
+  ],
+  "additional_info": {
+    "veteran_experience": [
+      "Mentor - American Corporate Partners (ACP), guiding transitioning service members",
+      "Member - Veterans in Business Network"
+    ],
+    "volunteer": [
+      {
+        "organization": "Big Brothers Big Sisters",
+        "role": "Youth Mentor",
+        "description": "Mentored at-risk youth from military families, providing guidance on academic achievement, career planning, and personal development. Organized monthly activities focused on building leadership and communication skills.",
+        "date_range": "2020 – Present"
+      }
+    ],
+    "awards": [
+      "Army Achievement Medal"
+    ],
+    "languages": ["English", "Spanish"],
+    "references_available": true
+  }
+}
