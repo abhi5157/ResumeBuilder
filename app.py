@@ -45,8 +45,50 @@ except ImportError as e:
     resume_service = None
     settings = None
     validator = None
+    # Provide safe fallbacks so the app doesn't crash with NameError when a component
+    # import fails on deployment (e.g., packaging/path differences on Streamlit Cloud).
+    # These fallbacks show a helpful error message in the UI and avoid AttributeErrors
+    # from missing validator methods.
 
-    # Silently handle import errors
+    def _missing_component(name, exc):
+        def _f(*args, **kwargs):
+            st.error(
+                f"Component '{name}' failed to load. The app is partially degraded; check logs for details."
+            )
+            with st.expander("Debug info"):
+                # Only show the exception string to aid debugging (no sensitive data expected in ImportError)
+                st.write(str(exc))
+            return None
+
+        return _f
+
+    # Fallback UI components
+    render_landing_page = _missing_component("components.landing_page.render_landing_page", e)
+    render_live_preview_panel = _missing_component(
+        "components.live_preview_clean.render_live_preview_panel", e
+    )
+    render_enhanced_resume_preview = _missing_component(
+        "utils.resume_preview.render_enhanced_resume_preview",
+        e,
+    )
+
+    # Minimal validator stub to avoid AttributeErrors in validation calls.
+    class _ValidatorStub:
+        def _ok(self, *a, **k):
+            return (True, "")
+
+        validate_full_name = _ok
+        validate_phone = _ok
+        validate_email = _ok
+        validate_linkedin = _ok
+        validate_city_state = _ok
+        validate_years_service = _ok
+        validate_url = _ok
+
+        def validate_date(self, value, label=None):
+            return (True, "")
+
+    validator = _ValidatorStub()
 hide_streamlit_style = """
     <style>
     #MainMenu {visibility: hidden;}     /* Hides the hamburger menu */
