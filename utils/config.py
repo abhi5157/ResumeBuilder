@@ -67,8 +67,8 @@ class Settings(BaseSettings):
         if env_ai_model:
             self.ai_model = str(env_ai_model)
             config_sources['AI_MODEL'] = f"env:AI_MODEL"
-        elif _secrets.get("AI_MODEL") or _secrets.get("ai_model"):
-            self.ai_model = str(_secrets.get("AI_MODEL") or _secrets.get("ai_model"))
+        elif "AI_MODEL" in _secrets or "ai_model" in _secrets:
+            self.ai_model = str(_secrets["AI_MODEL"] if "AI_MODEL" in _secrets else _secrets["ai_model"])
             config_sources['AI_MODEL'] = f"st.secrets:AI_MODEL"
         else:
             config_sources['AI_MODEL'] = ".env or default"
@@ -78,8 +78,8 @@ class Settings(BaseSettings):
         if env_log_level:
             self.log_level = str(env_log_level)
             config_sources['LOG_LEVEL'] = f"env:LOG_LEVEL"
-        elif _secrets.get("LOG_LEVEL") or _secrets.get("log_level"):
-            self.log_level = str(_secrets.get("LOG_LEVEL") or _secrets.get("log_level"))
+        elif "LOG_LEVEL" in _secrets or "log_level" in _secrets:
+            self.log_level = str(_secrets["LOG_LEVEL"] if "LOG_LEVEL" in _secrets else _secrets["log_level"])
             config_sources['LOG_LEVEL'] = f"st.secrets:LOG_LEVEL"
         else:
             config_sources['LOG_LEVEL'] = ".env or default"
@@ -92,9 +92,9 @@ class Settings(BaseSettings):
             except Exception:
                 self.redact_pii = False
             config_sources['REDACT_PII'] = f"env:REDACT_PII"
-        elif _secrets.get("REDACT_PII") or _secrets.get("redact_pii") is not None:
+        elif "REDACT_PII" in _secrets or "redact_pii" in _secrets:
             try:
-                self.redact_pii = str(_secrets.get("REDACT_PII") or _secrets.get("redact_pii")).lower() == "true"
+                self.redact_pii = str(_secrets["REDACT_PII"] if "REDACT_PII" in _secrets else _secrets["redact_pii"]).lower() == "true"
             except Exception:
                 self.redact_pii = False
             config_sources['REDACT_PII'] = f"st.secrets:REDACT_PII"
@@ -106,8 +106,8 @@ class Settings(BaseSettings):
         if env_openai_key:
             self.openai_api_key = str(env_openai_key)
             config_sources['OPENAI_API_KEY'] = f"env:OPENAI_API_KEY"
-        elif _secrets.get("OPENAI_API_KEY") or _secrets.get("openai_api_key"):
-            self.openai_api_key = str(_secrets.get("OPENAI_API_KEY") or _secrets.get("openai_api_key"))
+        elif "OPENAI_API_KEY" in _secrets or "openai_api_key" in _secrets:
+            self.openai_api_key = str(_secrets["OPENAI_API_KEY"] if "OPENAI_API_KEY" in _secrets else _secrets["openai_api_key"])
             config_sources['OPENAI_API_KEY'] = f"st.secrets:OPENAI_API_KEY"
         else:
             config_sources['OPENAI_API_KEY'] = ".env or default"
