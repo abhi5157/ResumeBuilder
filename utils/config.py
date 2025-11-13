@@ -51,8 +51,7 @@ class Settings(BaseSettings):
         self.output_dir.mkdir(exist_ok=True)
         self.template_dir.mkdir(exist_ok=True, parents=True)
         self.data_dir.mkdir(exist_ok=True)
-        # Allow explicit overrides from OS environment or Streamlit secrets
-        # This helps on Streamlit Community Cloud where secrets are available via `st.secrets`.
+
         import os
         try:
             import streamlit as _st
@@ -60,43 +59,66 @@ class Settings(BaseSettings):
         except Exception:
             _secrets = {}
 
-        # Prefer explicit environment variables first (AI_MODEL, LOG_LEVEL, REDACT_PII)
+        # Track source for each config
+        config_sources = {}
+
+        # AI_MODEL
         env_ai_model = os.getenv("AI_MODEL") or os.getenv("ai_model")
-        env_log_level = os.getenv("LOG_LEVEL") or os.getenv("log_level")
-        env_redact = os.getenv("REDACT_PII")
-        env_openai_key = os.getenv("OPENAI_API_KEY") or os.getenv("openai_api_key")
-
-        # Fall back to Streamlit secrets if env vars are not set
-        if not env_ai_model:
-            env_ai_model = _secrets.get("AI_MODEL") or _secrets.get("ai_model")
-        if not env_log_level:
-            env_log_level = _secrets.get("LOG_LEVEL") or _secrets.get("log_level")
-        if env_redact is None:
-            env_redact = _secrets.get("REDACT_PII") or _secrets.get("redact_pii")
-        if not env_openai_key:
-            env_openai_key = _secrets.get("OPENAI_API_KEY") or _secrets.get("openai_api_key")
-
-        # Apply overrides where present
         if env_ai_model:
             self.ai_model = str(env_ai_model)
+            config_sources['AI_MODEL'] = f"env:AI_MODEL"
+        elif _secrets.get("AI_MODEL") or _secrets.get("ai_model"):
+            self.ai_model = str(_secrets.get("AI_MODEL") or _secrets.get("ai_model"))
+            config_sources['AI_MODEL'] = f"st.secrets:AI_MODEL"
+        else:
+            config_sources['AI_MODEL'] = ".env or default"
+
+        # LOG_LEVEL
+        env_log_level = os.getenv("LOG_LEVEL") or os.getenv("log_level")
         if env_log_level:
             self.log_level = str(env_log_level)
+            config_sources['LOG_LEVEL'] = f"env:LOG_LEVEL"
+        elif _secrets.get("LOG_LEVEL") or _secrets.get("log_level"):
+            self.log_level = str(_secrets.get("LOG_LEVEL") or _secrets.get("log_level"))
+            config_sources['LOG_LEVEL'] = f"st.secrets:LOG_LEVEL"
+        else:
+            config_sources['LOG_LEVEL'] = ".env or default"
+
+        # REDACT_PII
+        env_redact = os.getenv("REDACT_PII")
         if env_redact is not None:
-            # Allow boolean-like strings
             try:
                 self.redact_pii = str(env_redact).lower() == "true"
             except Exception:
                 self.redact_pii = False
+            config_sources['REDACT_PII'] = f"env:REDACT_PII"
+        elif _secrets.get("REDACT_PII") or _secrets.get("redact_pii") is not None:
+            try:
+                self.redact_pii = str(_secrets.get("REDACT_PII") or _secrets.get("redact_pii")).lower() == "true"
+            except Exception:
+                self.redact_pii = False
+            config_sources['REDACT_PII'] = f"st.secrets:REDACT_PII"
+        else:
+            config_sources['REDACT_PII'] = ".env or default"
+
+        # OPENAI_API_KEY
+        env_openai_key = os.getenv("OPENAI_API_KEY") or os.getenv("openai_api_key")
         if env_openai_key:
             self.openai_api_key = str(env_openai_key)
+            config_sources['OPENAI_API_KEY'] = f"env:OPENAI_API_KEY"
+        elif _secrets.get("OPENAI_API_KEY") or _secrets.get("openai_api_key"):
+            self.openai_api_key = str(_secrets.get("OPENAI_API_KEY") or _secrets.get("openai_api_key"))
+            config_sources['OPENAI_API_KEY'] = f"st.secrets:OPENAI_API_KEY"
+        else:
+            config_sources['OPENAI_API_KEY'] = ".env or default"
 
         # Debug: Show loaded configuration for startup logs (Streamlit captures stdout/stderr)
         print(f"\n[Config] Loaded settings (env/st.secrets aware):")
         print(f"  - AI_PROVIDER: {self.ai_provider}")
-        print(f"  - AI_MODEL: {self.ai_model}")
-        print(f"  - LOG_LEVEL: {self.log_level}")
-        print(f"  - REDACT_PII: {self.redact_pii}")
-        print(f"  - OPENAI_API_KEY: {'***' + self.openai_api_key[-8:] if self.openai_api_key else 'NOT SET'}")
+        print(f"  - AI_MODEL: {self.ai_model}   [source: {config_sources['AI_MODEL']}]")
+        print(f"  - LOG_LEVEL: {self.log_level} [source: {config_sources['LOG_LEVEL']}]")
+        print(f"  - REDACT_PII: {self.redact_pii} [source: {config_sources['REDACT_PII']}]")
+        print(f"  - OPENAI_API_KEY: {'***' + self.openai_api_key[-8:] if self.openai_api_key else 'NOT SET'} [source: {config_sources['OPENAI_API_KEY']}]\n")
 
         # Validate OpenAI configuration
         if self.ai_provider == "openai" and not self.openai_api_key:
